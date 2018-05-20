@@ -10,7 +10,6 @@ import {
   Alert
 } from 'react-native';
 import { Icon, ButtonGroup, List, ListItem, Tile } from 'react-native-elements'
-// import Icon from 'react-native-vector-icons';
 import Sound from 'react-native-sound';
 
 const iosBlue = 'rgb(0, 122, 255)'
@@ -26,6 +25,42 @@ const songs = [
   },
   {
     id: 1,
+    title: 'Taconafide - Visa',
+    url: 'TaconafideVisa.mp3',
+    basePath: Sound.MAIN_BUNDLE,
+  },
+  {
+    id: 2,
+    title: 'Hippie Sabotage - Your Soul',
+    url: 'HippieSabotageYourSoul.mp3',
+    basePath: Sound.MAIN_BUNDLE,
+  },
+  {
+    id: 3,
+    title: 'Taconafide - Visa',
+    url: 'TaconafideVisa.mp3',
+    basePath: Sound.MAIN_BUNDLE,
+  },
+  {
+    id: 4,
+    title: 'Hippie Sabotage - Your Soul',
+    url: 'HippieSabotageYourSoul.mp3',
+    basePath: Sound.MAIN_BUNDLE,
+  },
+  {
+    id: 5,
+    title: 'Taconafide - Visa',
+    url: 'TaconafideVisa.mp3',
+    basePath: Sound.MAIN_BUNDLE,
+  },
+  {
+    id: 6,
+    title: 'Hippie Sabotage - Your Soul',
+    url: 'HippieSabotageYourSoul.mp3',
+    basePath: Sound.MAIN_BUNDLE,
+  },
+  {
+    id: 7,
     title: 'Taconafide - Visa',
     url: 'TaconafideVisa.mp3',
     basePath: Sound.MAIN_BUNDLE,
@@ -54,16 +89,10 @@ export default class App extends Component {
     this.setState({
       songsList: this.state.songsList.cloneWithRows(songs),
     })
-
-    //this.loadSong('abc.mp3')
   }
 
   loadAndPlay(songData) {
     this.resetSong()
-    this.setState({
-      isPlaying: false,
-      actualSong: songData.id
-    })
     Sound.setCategory('Playback');
 
     song = new Sound(songData.url, Sound.MAIN_BUNDLE, (error) => {
@@ -107,20 +136,26 @@ export default class App extends Component {
     this.setState({ isPlaying: !this.state.isPlaying })
   }
 
-  // stopSong() {
-  //   if (typeof song == "undefined") {
-  //     return;
-  //   }
+  nextSong() {
 
-  //   song.stop(() => {
-  //     this.setState({
-  //       isPlaying: false,
-  //       actualSong: -1
-  //     })
-  //   });
+    let actual = this.state.actualSong + 1
 
+    if (actual > songs.length-1) {
+      actual = 0
+    }
 
-  // }
+    this.loadAndPlay(songs[actual])
+  }
+
+  previousSong() {
+    let actual = this.state.actualSong - 1
+
+    if (actual < 0) {
+      actual = songs.length-1
+    }
+
+    this.loadAndPlay(songs[actual])
+  }
 
   resetSong() {
     if (typeof song == "undefined") {
@@ -136,29 +171,16 @@ export default class App extends Component {
   }
 
   renderRow(rowData, sectionID) {
-    console.log(rowData)
     let songIcon = "music-note"
     let title = rowData.title
     if (this.state.actualSong == rowData.id) {
       songIcon = this.state.isPlaying ? 'play-arrow' : 'pause'
-      // var duration = song.getDuration().toFixed(0)
-      // var mins = Math.floor(duration / 60)
-      // var secs = Math.floor((duration / 60 - mins) * 60)
-      //title = title + " " + mins + ":" + secs
-      // setInterval(() => {
-      //   if (typeof song !== "undefined") {
-      //     song.getCurrentTime((currentTime) => {
-      //       console.log(currentTime);
-      //       title = title + " " + currentTime
-      //     });
-      //   }
-      // }, 1000);
-      
     }
 
     return (
       <ListItem
         leftIcon={{ name: songIcon }}
+        hideChevron
         title={title}
         subtitle={rowData.duration}
         onPress={() => {
@@ -175,17 +197,6 @@ export default class App extends Component {
     const component4 = () => <Icon name='skip-next' type='material-icons' color={iosBlue} />
     const buttons = [{ element: component1 }, { element: component2 }, { element: component3 }, { element: component4 }]
 
-    let time = ['czas']
-
-    // setInterval(() => {
-    //   if (typeof song !== "undefined") {
-    //     song.getCurrentTime((currentTime) => {
-    //       console.log(currentTime);
-    //       time = ['czas ' + currentTime]
-    //     });
-    //   }
-    // }, 1000);
-
     return (
       <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
         <ScrollView style={{ width: "100%", marginBottom: buttonsHeight }}>
@@ -197,11 +208,6 @@ export default class App extends Component {
             />
           </List>
         </ScrollView>
-        <ButtonGroup
-          buttons={time}
-          // this.state.isPlaying ? 32 :
-          containerStyle={{ height: 0, position: 'absolute', left: 0, right: 0, bottom: buttonsHeight - 2, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0 }}
-        />
         <ButtonGroup
           buttons={buttons}
           containerStyle={{ height: buttonsHeight, position: 'absolute', left: 0, right: 0, bottom: 0, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0 }}
