@@ -19,50 +19,50 @@ const buttonsHeight = 40
 const songs = [
   {
     id: 0,
-    title: 'Hippie Sabotage - Your Soul',
-    url: 'HippieSabotageYourSoul.mp3',
+    title: 'Astronomyy',
+    url: 'Astronomyy.mp3',
     basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 1,
-    title: 'Taconafide - Visa',
-    url: 'TaconafideVisa.mp3',
+    title: 'Far From Home',
+    url: 'FarFromHome.mp3',
     basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 2,
-    title: 'Hippie Sabotage - Your Soul',
-    url: 'HippieSabotageYourSoul.mp3',
+    title: 'Homegrown',
+    url: 'Homegrown.mp3',
     basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 3,
-    title: 'Taconafide - Visa',
-    url: 'TaconafideVisa.mp3',
+    title: 'Hundred Miles',
+    url: 'HundredMiles.mp3',
     basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 4,
-    title: 'Hippie Sabotage - Your Soul',
-    url: 'HippieSabotageYourSoul.mp3',
+    title: 'Indian Summer',
+    url: 'IndianSummer.mp3',
     basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 5,
-    title: 'Taconafide - Visa',
-    url: 'TaconafideVisa.mp3',
+    title: 'Stay',
+    url: 'Stay.mp3',
     basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 6,
-    title: 'Hippie Sabotage - Your Soul',
-    url: 'HippieSabotageYourSoul.mp3',
+    title: 'Lay It',
+    url: 'LayIt.mp3',
     basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 7,
-    title: 'Taconafide - Visa',
-    url: 'TaconafideVisa.mp3',
+    title: 'Drive',
+    url: 'Drive.mp3',
     basePath: Sound.MAIN_BUNDLE,
   },
 ];
@@ -97,21 +97,20 @@ export default class App extends Component {
 
     song = new Sound(songData.url, Sound.MAIN_BUNDLE, (error) => {
       if (error) {
-        console.log('failed to load the sound', error);
         Alert.alert('Cannot play this song', error.message);
         return;
       }
       this.setState({ actualSong: songData.id })
-      console.log('duration in seconds: ' + song.getDuration() + 'number of channels: ' + song.getNumberOfChannels());
+
       this.playNow()
     });
   }
 
   playNow() {
-    console.log("play now")
     song.play((success) => {
       if (success) {
         console.log('successfully finished playing');
+        this.nextSong()
       } else {
         console.log('playback failed due to audio decoding errors');
         song.reset();
@@ -130,7 +129,15 @@ export default class App extends Component {
     if (this.state.isPlaying == true) {
       song.pause()
     } else {
-      song.play()
+      song.play((success) => {
+        if (success) {
+          console.log('successfully finished playing');
+          this.nextSong()
+        } else {
+          console.log('playback failed due to audio decoding errors');
+          song.reset();
+        }
+      });
     }
 
     this.setState({ isPlaying: !this.state.isPlaying })
@@ -140,7 +147,7 @@ export default class App extends Component {
 
     let actual = this.state.actualSong + 1
 
-    if (actual > songs.length-1) {
+    if (actual > songs.length - 1) {
       actual = 0
     }
 
@@ -151,7 +158,7 @@ export default class App extends Component {
     let actual = this.state.actualSong - 1
 
     if (actual < 0) {
-      actual = songs.length-1
+      actual = songs.length - 1
     }
 
     this.loadAndPlay(songs[actual])

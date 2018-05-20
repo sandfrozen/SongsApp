@@ -49,9 +49,14 @@
 		CF5D2909F90A4D98A1938C9C /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B2E5FB0F5D24618ABBE49A1 /* Foundation.ttf */; };
 		D371E24A6D3B43B1AC6DBACC /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 347AC88ECD274FC09BEB0CE2 /* Octicons.ttf */; };
 		DE9CD0EAC9AF40F09787BC08 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B5699DE5D64D3BB244A422 /* libRNVectorIcons.a */; };
-		E93EB2F420B1B7E90063960A /* HippieSabotageYourSoul.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E93EB2F220B1B7E90063960A /* HippieSabotageYourSoul.mp3 */; };
-		E93EB2F520B1B7E90063960A /* TaconafideVisa.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E93EB2F320B1B7E90063960A /* TaconafideVisa.mp3 */; };
-		E9C260B020B1A81C007CE4C9 /* abc.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E9C260AF20B1A81C007CE4C9 /* abc.mp3 */; };
+		E93EB36320B21CB30063960A /* Homegrown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E93EB35B20B21CB20063960A /* Homegrown.mp3 */; };
+		E93EB36420B21CB30063960A /* Drive.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E93EB35C20B21CB30063960A /* Drive.mp3 */; };
+		E93EB36520B21CB30063960A /* FarFromHome.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E93EB35D20B21CB30063960A /* FarFromHome.mp3 */; };
+		E93EB36620B21CB30063960A /* LayIt.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E93EB35E20B21CB30063960A /* LayIt.mp3 */; };
+		E93EB36720B21CB30063960A /* Stay.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E93EB35F20B21CB30063960A /* Stay.mp3 */; };
+		E93EB36820B21CB30063960A /* Astronomyy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E93EB36020B21CB30063960A /* Astronomyy.mp3 */; };
+		E93EB36920B21CB30063960A /* HundredMiles.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E93EB36120B21CB30063960A /* HundredMiles.mp3 */; };
+		E93EB36A20B21CB30063960A /* IndianSummer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E93EB36220B21CB30063960A /* IndianSummer.mp3 */; };
 		EA750C1E71184898AB42D16D /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA28E5A0CA5448ABC4782E1 /* Feather.ttf */; };
 		F98F07C8D42E44B0A47FE20F /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C915EE8A3D874978AF0BD27F /* MaterialCommunityIcons.ttf */; };
 /* End PBXBuildFile section */
@@ -388,9 +393,14 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		C915EE8A3D874978AF0BD27F /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		DF750E0E936B4653AB3B9606 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
-		E93EB2F220B1B7E90063960A /* HippieSabotageYourSoul.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HippieSabotageYourSoul.mp3; sourceTree = "<group>"; };
-		E93EB2F320B1B7E90063960A /* TaconafideVisa.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TaconafideVisa.mp3; sourceTree = "<group>"; };
-		E9C260AF20B1A81C007CE4C9 /* abc.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = abc.mp3; sourceTree = "<group>"; };
+		E93EB35B20B21CB20063960A /* Homegrown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Homegrown.mp3; sourceTree = "<group>"; };
+		E93EB35C20B21CB30063960A /* Drive.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Drive.mp3; sourceTree = "<group>"; };
+		E93EB35D20B21CB30063960A /* FarFromHome.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FarFromHome.mp3; sourceTree = "<group>"; };
+		E93EB35E20B21CB30063960A /* LayIt.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LayIt.mp3; sourceTree = "<group>"; };
+		E93EB35F20B21CB30063960A /* Stay.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Stay.mp3; sourceTree = "<group>"; };
+		E93EB36020B21CB30063960A /* Astronomyy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Astronomyy.mp3; sourceTree = "<group>"; };
+		E93EB36120B21CB30063960A /* HundredMiles.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HundredMiles.mp3; sourceTree = "<group>"; };
+		E93EB36220B21CB30063960A /* IndianSummer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = IndianSummer.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -705,9 +715,14 @@
 		E9C260AC20B1A7EA007CE4C9 /* Songs */ = {
 			isa = PBXGroup;
 			children = (
-				E93EB2F220B1B7E90063960A /* HippieSabotageYourSoul.mp3 */,
-				E93EB2F320B1B7E90063960A /* TaconafideVisa.mp3 */,
-				E9C260AF20B1A81C007CE4C9 /* abc.mp3 */,
+				E93EB36020B21CB30063960A /* Astronomyy.mp3 */,
+				E93EB35C20B21CB30063960A /* Drive.mp3 */,
+				E93EB35D20B21CB30063960A /* FarFromHome.mp3 */,
+				E93EB35B20B21CB20063960A /* Homegrown.mp3 */,
+				E93EB36120B21CB30063960A /* HundredMiles.mp3 */,
+				E93EB36220B21CB30063960A /* IndianSummer.mp3 */,
+				E93EB35E20B21CB30063960A /* LayIt.mp3 */,
+				E93EB35F20B21CB30063960A /* Stay.mp3 */,
 			);
 			path = Songs;
 			sourceTree = "<group>";
@@ -1178,17 +1193,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9C260B020B1A81C007CE4C9 /* abc.mp3 in Resources */,
-				E93EB2F520B1B7E90063960A /* TaconafideVisa.mp3 in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				E93EB36320B21CB30063960A /* Homegrown.mp3 in Resources */,
+				E93EB36420B21CB30063960A /* Drive.mp3 in Resources */,
+				E93EB36A20B21CB30063960A /* IndianSummer.mp3 in Resources */,
+				E93EB36520B21CB30063960A /* FarFromHome.mp3 in Resources */,
+				E93EB36620B21CB30063960A /* LayIt.mp3 in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				E93EB2F420B1B7E90063960A /* HippieSabotageYourSoul.mp3 in Resources */,
 				5A8BF1A5B85149E690AAE5C4 /* Entypo.ttf in Resources */,
 				97FA4C8590F7464C952DBC5B /* EvilIcons.ttf in Resources */,
 				EA750C1E71184898AB42D16D /* Feather.ttf in Resources */,
+				E93EB36720B21CB30063960A /* Stay.mp3 in Resources */,
 				BE7F3A53C3C5439C9064C7A6 /* FontAwesome.ttf in Resources */,
+				E93EB36820B21CB30063960A /* Astronomyy.mp3 in Resources */,
 				CF5D2909F90A4D98A1938C9C /* Foundation.ttf in Resources */,
 				047B4ABE0E8E4A2EB14F4E48 /* Ionicons.ttf in Resources */,
+				E93EB36920B21CB30063960A /* HundredMiles.mp3 in Resources */,
 				F98F07C8D42E44B0A47FE20F /* MaterialCommunityIcons.ttf in Resources */,
 				1A4A6B7D583E44AD9020F4D3 /* MaterialIcons.ttf in Resources */,
 				D371E24A6D3B43B1AC6DBACC /* Octicons.ttf in Resources */,
