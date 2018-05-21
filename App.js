@@ -21,49 +21,61 @@ const songs = [
     id: 0,
     title: 'Astronomyy',
     url: 'Astronomyy.mp3',
-    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 1,
     title: 'Far From Home',
     url: 'FarFromHome.mp3',
-    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 2,
     title: 'Homegrown',
     url: 'Homegrown.mp3',
-    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 3,
     title: 'Hundred Miles',
     url: 'HundredMiles.mp3',
-    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 4,
     title: 'Indian Summer',
     url: 'IndianSummer.mp3',
-    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 5,
     title: 'Stay',
     url: 'Stay.mp3',
-    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 6,
     title: 'Lay It',
     url: 'LayIt.mp3',
-    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 7,
     title: 'Drive',
     url: 'Drive.mp3',
-    basePath: Sound.MAIN_BUNDLE,
+  },
+  {
+    id: 8,
+    title: 'Drive',
+    url: 'Drive.mp3',
+  },
+  {
+    id: 9,
+    title: 'Drive',
+    url: 'Drive.mp3',
+  },
+  {
+    id: 10,
+    title: 'Drive',
+    url: 'Drive.mp3',
+  },
+  {
+    id: 11,
+    title: 'Drive',
+    url: 'Drive.mp3',
   },
 ];
 
@@ -74,7 +86,9 @@ export default class App extends Component {
     this.state = {
       isPlaying: false,
       songsList: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
-      actualSong: -1
+      actualSong: -1,
+      time: 0,
+      songFullTime: 0 + ' s'
     }
 
     var song = null;
@@ -89,21 +103,45 @@ export default class App extends Component {
     this.setState({
       songsList: this.state.songsList.cloneWithRows(songs),
     })
+
+    // setInterval(() => {
+    //   if(this.state.isPlaying) {
+    //     song.getCurrentTime((sec) => {
+    //       this.setState({ time: Math.floor(sec.toFixed(0)) })
+    //     })
+    //   }
+    // }, 300);
   }
 
   loadAndPlay(songData) {
     this.resetSong()
-    Sound.setCategory('Playback');
 
     song = new Sound(songData.url, Sound.MAIN_BUNDLE, (error) => {
       if (error) {
         Alert.alert('Cannot play this song', error.message);
         return;
       }
-      this.setState({ actualSong: songData.id })
+      this.setState({
+        actualSong: songData.id,
+        songFullTime: song.getDuration().toFixed(0) + " s"
+       })
 
       this.playNow()
     });
+  }
+
+  resetSong() {
+    if (typeof song == "undefined") {
+      return;
+    }
+    song.release();
+    song = undefined;
+
+    this.setState({
+      isPlaying: false,
+      actualSong: -1,
+      time: 0
+    })
   }
 
   playNow() {
@@ -164,23 +202,12 @@ export default class App extends Component {
     this.loadAndPlay(songs[actual])
   }
 
-  resetSong() {
-    if (typeof song == "undefined") {
-      return;
-    }
-    song.release();
-    song = undefined;
-
-    this.setState({
-      isPlaying: false,
-      actualSong: -1
-    })
-  }
-
   renderRow(rowData, sectionID) {
     let songIcon = "music-note"
     let title = rowData.title
+    console.log("render before if")
     if (this.state.actualSong == rowData.id) {
+      console.log("render in if")
       songIcon = this.state.isPlaying ? 'play-arrow' : 'pause'
     }
 
@@ -206,7 +233,7 @@ export default class App extends Component {
 
     return (
       <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
-        <ScrollView style={{ width: "100%", marginBottom: buttonsHeight }}>
+        <ScrollView style={{ width: "100%", marginBottom: 30 }}>
           <List>
             <ListView
               dataSource={this.state.songsList}
@@ -215,6 +242,10 @@ export default class App extends Component {
             />
           </List>
         </ScrollView>
+        <Text
+          style={{ height: 32, position: 'absolute', left: 0, right: 0, bottom: buttonsHeight-8, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0, alignItems: 'center', textAlign: 'center', backgroundColor: 'whitesmoke', paddingTop: 6 }}>
+          {/* {this.state.isPlaying ? songs[this.state.actualSong].title + " ": ""}{this.state.time} / {this.state.songFullTime} */}
+        </Text>
         <ButtonGroup
           buttons={buttons}
           containerStyle={{ height: buttonsHeight, position: 'absolute', left: 0, right: 0, bottom: 0, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0 }}
