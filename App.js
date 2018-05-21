@@ -74,7 +74,9 @@ export default class App extends Component {
     this.state = {
       isPlaying: false,
       songsList: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
-      actualSong: -1
+      actualSong: -1,
+      time: 0,
+      songDuration: 0
     }
 
     var song = null;
@@ -89,6 +91,15 @@ export default class App extends Component {
     this.setState({
       songsList: this.state.songsList.cloneWithRows(songs),
     })
+
+    setInterval(() => {
+      if (this.state.isPlaying) {
+        song.getCurrentTime((sec) => {
+          this.setState({ time: Math.floor(sec.toFixed(0)) })
+        })
+      }
+    }, 300);
+
   }
 
   loadAndPlay(songData) {
@@ -100,7 +111,8 @@ export default class App extends Component {
         Alert.alert('Cannot play this song', error.message);
         return;
       }
-      this.setState({ actualSong: songData.id })
+      this.setState({ actualSong: songData.id,
+        songDuration: song.getDuration().toFixed(0) })
 
       this.playNow()
     });
@@ -215,6 +227,11 @@ export default class App extends Component {
             />
           </List>
         </ScrollView>
+        <Text
+          style={{ height: 32, position: 'absolute', left: 0, right: 0, bottom: buttonsHeight-8, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0, alignItems: 'center', textAlign: 'center', backgroundColor: 'whitesmoke', paddingTop: 6 }}>
+          {this.state.isPlaying ? songs[this.state.actualSong].title + " ": "Song "}{this.state.time} / {this.state.songDuration}
+        </Text>
+
         <ButtonGroup
           buttons={buttons}
           containerStyle={{ height: buttonsHeight, position: 'absolute', left: 0, right: 0, bottom: 0, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0 }}
