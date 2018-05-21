@@ -68,7 +68,11 @@ export default class App extends Component {
       songsList: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
       actualSong: -1,
       time: 0,
+<<<<<<< HEAD
+      songDuration: 0
+=======
       songFullTime: 0
+>>>>>>> mucha
     }
 
     var song = null;
@@ -91,6 +95,10 @@ export default class App extends Component {
         })
       }
     }, 300);
+<<<<<<< HEAD
+
+=======
+>>>>>>> mucha
   }
 
   loadAndPlay(songData) {
@@ -101,10 +109,15 @@ export default class App extends Component {
         Alert.alert('Cannot play this song', error.message);
         return;
       }
+<<<<<<< HEAD
+      this.setState({ actualSong: songData.id,
+        songDuration: song.getDuration().toFixed(0) })
+=======
       this.setState({
         actualSong: songData.id,
         songFullTime: song.getDuration().toFixed(0)
       })
+>>>>>>> mucha
 
       this.playNow()
     });
@@ -185,7 +198,9 @@ export default class App extends Component {
   renderRow(rowData, sectionID) {
     let songIcon = "music-note"
     let title = rowData.title
+    console.log("render before if")
     if (this.state.actualSong == rowData.id) {
+      console.log("render in if")
       songIcon = this.state.isPlaying ? 'play-arrow' : 'pause'
     }
 
@@ -231,9 +246,16 @@ export default class App extends Component {
           </List>
         </ScrollView>
         <Text
+<<<<<<< HEAD
+          style={{ height: 32, position: 'absolute', left: 0, right: 0, bottom: buttonsHeight-8, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0, alignItems: 'center', textAlign: 'center', backgroundColor: 'whitesmoke', paddingTop: 6 }}>
+          {this.state.isPlaying ? songs[this.state.actualSong].title + " ": "Song "}{this.state.time} / {this.state.songDuration}
+        </Text>
+
+=======
           style={{ height: this.state.isPlaying ? 32 : 0, position: 'absolute', left: 0, right: 0, bottom: buttonsHeight - 8, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0, alignItems: 'center', textAlign: 'center', backgroundColor: 'whitesmoke', paddingTop: 6 }}>
           {this.state.isPlaying ? songs[this.state.actualSong].title + " " : ""}{this.getTimeFromSec(this.state.time) + "/" + this.getTimeFromSec(this.state.songFullTime)}
         </Text>
+>>>>>>> mucha
         <ButtonGroup
           buttons={buttons}
           containerStyle={{ height: buttonsHeight, position: 'absolute', left: 0, right: 0, bottom: 0, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0 }}

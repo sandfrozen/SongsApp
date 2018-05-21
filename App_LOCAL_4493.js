@@ -21,41 +21,49 @@ const songs = [
     id: 0,
     title: 'Astronomyy',
     url: 'Astronomyy.mp3',
+    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 1,
     title: 'Far From Home',
     url: 'FarFromHome.mp3',
+    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 2,
     title: 'Homegrown',
     url: 'Homegrown.mp3',
+    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 3,
     title: 'Hundred Miles',
     url: 'HundredMiles.mp3',
+    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 4,
     title: 'Indian Summer',
     url: 'IndianSummer.mp3',
+    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 5,
     title: 'Stay',
     url: 'Stay.mp3',
+    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 6,
     title: 'Lay It',
     url: 'LayIt.mp3',
+    basePath: Sound.MAIN_BUNDLE,
   },
   {
     id: 7,
     title: 'Drive',
     url: 'Drive.mp3',
+    basePath: Sound.MAIN_BUNDLE,
   },
 ];
 
@@ -68,7 +76,7 @@ export default class App extends Component {
       songsList: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
       actualSong: -1,
       time: 0,
-      songFullTime: 0
+      songDuration: 0
     }
 
     var song = null;
@@ -91,37 +99,23 @@ export default class App extends Component {
         })
       }
     }, 300);
+
   }
 
   loadAndPlay(songData) {
     this.resetSong()
+    Sound.setCategory('Playback');
 
     song = new Sound(songData.url, Sound.MAIN_BUNDLE, (error) => {
       if (error) {
         Alert.alert('Cannot play this song', error.message);
         return;
       }
-      this.setState({
-        actualSong: songData.id,
-        songFullTime: song.getDuration().toFixed(0)
-      })
+      this.setState({ actualSong: songData.id,
+        songDuration: song.getDuration().toFixed(0) })
 
       this.playNow()
     });
-  }
-
-  resetSong() {
-    if (typeof song == "undefined") {
-      return;
-    }
-    song.release();
-    song = undefined;
-
-    this.setState({
-      isPlaying: false,
-      actualSong: -1,
-      time: 0
-    })
   }
 
   playNow() {
@@ -182,6 +176,19 @@ export default class App extends Component {
     this.loadAndPlay(songs[actual])
   }
 
+  resetSong() {
+    if (typeof song == "undefined") {
+      return;
+    }
+    song.release();
+    song = undefined;
+
+    this.setState({
+      isPlaying: false,
+      actualSong: -1
+    })
+  }
+
   renderRow(rowData, sectionID) {
     let songIcon = "music-note"
     let title = rowData.title
@@ -202,16 +209,6 @@ export default class App extends Component {
     )
   }
 
-  getTimeFromSec(seconds) {
-    let mins = (seconds / 60).toFixed(0)
-    let sec = (seconds) % 60
-    if( sec < 10 ) {
-      sec = "0" + sec
-    }
-
-    return mins+":"+sec
-  }
-
   render() {
     const component1 = () => <Icon name='stop' type='material-icons' color={iosRed} />
     const component2 = () => <Icon name='skip-previous' type='material-icons' color={iosBlue} />
@@ -221,7 +218,7 @@ export default class App extends Component {
 
     return (
       <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
-        <ScrollView style={{ width: "100%", marginBottom: this.state.isPlaying ? 30 : 0 }}>
+        <ScrollView style={{ width: "100%", marginBottom: buttonsHeight }}>
           <List>
             <ListView
               dataSource={this.state.songsList}
@@ -231,9 +228,10 @@ export default class App extends Component {
           </List>
         </ScrollView>
         <Text
-          style={{ height: this.state.isPlaying ? 32 : 0, position: 'absolute', left: 0, right: 0, bottom: buttonsHeight - 8, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0, alignItems: 'center', textAlign: 'center', backgroundColor: 'whitesmoke', paddingTop: 6 }}>
-          {this.state.isPlaying ? songs[this.state.actualSong].title + " " : ""}{this.getTimeFromSec(this.state.time) + "/" + this.getTimeFromSec(this.state.songFullTime)}
+          style={{ height: 32, position: 'absolute', left: 0, right: 0, bottom: buttonsHeight-8, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0, alignItems: 'center', textAlign: 'center', backgroundColor: 'whitesmoke', paddingTop: 6 }}>
+          {this.state.isPlaying ? songs[this.state.actualSong].title + " ": "Song "}{this.state.time} / {this.state.songDuration}
         </Text>
+
         <ButtonGroup
           buttons={buttons}
           containerStyle={{ height: buttonsHeight, position: 'absolute', left: 0, right: 0, bottom: 0, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0 }}

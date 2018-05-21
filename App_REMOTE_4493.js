@@ -185,7 +185,9 @@ export default class App extends Component {
   renderRow(rowData, sectionID) {
     let songIcon = "music-note"
     let title = rowData.title
+    console.log("render before if")
     if (this.state.actualSong == rowData.id) {
+      console.log("render in if")
       songIcon = this.state.isPlaying ? 'play-arrow' : 'pause'
     }
 
