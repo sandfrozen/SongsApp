@@ -57,26 +57,6 @@ const songs = [
     title: 'Drive',
     url: 'Drive.mp3',
   },
-  {
-    id: 8,
-    title: 'Drive',
-    url: 'Drive.mp3',
-  },
-  {
-    id: 9,
-    title: 'Drive',
-    url: 'Drive.mp3',
-  },
-  {
-    id: 10,
-    title: 'Drive',
-    url: 'Drive.mp3',
-  },
-  {
-    id: 11,
-    title: 'Drive',
-    url: 'Drive.mp3',
-  },
 ];
 
 export default class App extends Component {
@@ -88,7 +68,7 @@ export default class App extends Component {
       songsList: new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 }),
       actualSong: -1,
       time: 0,
-      songFullTime: 0 + ' s'
+      songFullTime: 0
     }
 
     var song = null;
@@ -104,13 +84,13 @@ export default class App extends Component {
       songsList: this.state.songsList.cloneWithRows(songs),
     })
 
-    // setInterval(() => {
-    //   if(this.state.isPlaying) {
-    //     song.getCurrentTime((sec) => {
-    //       this.setState({ time: Math.floor(sec.toFixed(0)) })
-    //     })
-    //   }
-    // }, 300);
+    setInterval(() => {
+      if (this.state.isPlaying) {
+        song.getCurrentTime((sec) => {
+          this.setState({ time: Math.floor(sec.toFixed(0)) })
+        })
+      }
+    }, 300);
   }
 
   loadAndPlay(songData) {
@@ -123,8 +103,8 @@ export default class App extends Component {
       }
       this.setState({
         actualSong: songData.id,
-        songFullTime: song.getDuration().toFixed(0) + " s"
-       })
+        songFullTime: song.getDuration().toFixed(0)
+      })
 
       this.playNow()
     });
@@ -224,6 +204,16 @@ export default class App extends Component {
     )
   }
 
+  getTimeFromSec(seconds) {
+    let mins = (seconds / 60).toFixed(0)
+    let sec = (seconds) % 60
+    if( sec < 10 ) {
+      sec = "0" + sec
+    }
+
+    return mins+":"+sec
+  }
+
   render() {
     const component1 = () => <Icon name='stop' type='material-icons' color={iosRed} />
     const component2 = () => <Icon name='skip-previous' type='material-icons' color={iosBlue} />
@@ -233,7 +223,7 @@ export default class App extends Component {
 
     return (
       <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
-        <ScrollView style={{ width: "100%", marginBottom: 30 }}>
+        <ScrollView style={{ width: "100%", marginBottom: this.state.isPlaying ? 30 : 0 }}>
           <List>
             <ListView
               dataSource={this.state.songsList}
@@ -243,8 +233,8 @@ export default class App extends Component {
           </List>
         </ScrollView>
         <Text
-          style={{ height: 32, position: 'absolute', left: 0, right: 0, bottom: buttonsHeight-8, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0, alignItems: 'center', textAlign: 'center', backgroundColor: 'whitesmoke', paddingTop: 6 }}>
-          {/* {this.state.isPlaying ? songs[this.state.actualSong].title + " ": ""}{this.state.time} / {this.state.songFullTime} */}
+          style={{ height: this.state.isPlaying ? 32 : 0, position: 'absolute', left: 0, right: 0, bottom: buttonsHeight - 8, marginLeft: 0, marginBottom: 0, marginRight: 0, marginTop: 0, alignItems: 'center', textAlign: 'center', backgroundColor: 'whitesmoke', paddingTop: 6 }}>
+          {this.state.isPlaying ? songs[this.state.actualSong].title + " " : ""}{this.getTimeFromSec(this.state.time) + "/" + this.getTimeFromSec(this.state.songFullTime)}
         </Text>
         <ButtonGroup
           buttons={buttons}
